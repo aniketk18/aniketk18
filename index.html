@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aniket Kumawat | Full Stack Developer & AI Engineer</title>
+  <meta name="description"
+    content="Portfolio of Aniket Kumawat, Full Stack Developer & AI Engineer. Specializing in Next.js, Node.js, OpenCV computer vision, and AI/ML models." />
+  <meta name="theme-color" content="#030303" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            bg: '#030303',
+            surface: '#09090b',
+            'surface-2': '#121217',
+            accent: '#3b82f6', // Premium Blue
+            'accent-emerald': '#10b981', // Emerald for EcoTrace
+            'accent-violet': '#8b5cf6', // Violet accent
+          },
+          borderRadius: {
+            'xl-custom': '20px',
+            'lg-custom': '14px',
+            'md-custom': '10px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles for Premium Polish -->
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030303;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b82f6;
+    }
+
+    /* Custom Selection */
+    ::selection {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+    }
+
+    /* Custom Cursor (for non-touch devices) */
+    @media (hover: hover) and (pointer: fine) {
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(59, 130, 246, 0.4);
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        transition-timing-function: ease-out;
+      }
+      .custom-cursor-dot {
+        width: 4px;
+        height: 4px;
+        background-color: #3b82f6;
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+      }
+      body:hover .custom-cursor,
+      body:hover .custom-cursor-dot {
+        opacity: 1;
+      }
+    }
+
+    /* Ambient Glows */
+    .glow-top-right {
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .glow-mid-left {
+      position: absolute;
+      top: 35%;
+      left: -15%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-bottom-right {
+      position: absolute;
+      bottom: 5%;
+      right: -10%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Active Nav Link from Scrollspy */
+    .nav-active {
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+    .nav-active::after {
+      width: 100% !important;
+      opacity: 1 !important;
+    }
+
+    /* Glassmorphic card styling */
+    .glass-card {
+      background: rgba(9, 9, 11, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.25);
+    }
+
+    /* Timeline gradient bar */
+    .timeline-track {
+      background: linear-gradient(180deg,
+          #3b82f6 0%,
+          rgba(59, 130, 246, 0.2) 70%,
+          transparent 100%);
+    }
+
+    /* Form input focus styles */
+    .form-input:focus {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Smooth slide transition */
+    .slide-enter {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    .slide-active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    /* Custom Pulsing Badge */
+    .pulse-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0px rgba(16, 185, 129, 0);
+      }
+    }
+
+    /* Browser Mockup Styling */
+    .browser-mockup {
+      position: relative;
+      width: 100%;
+      background: #09090b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .browser-topbar {
+      height: 36px;
+      background: #121217;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .browser-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+    .browser-dot.red { background: #ef4444; }
+    .browser-dot.yellow { background: #eab308; }
+    .browser-dot.green { background: #22c55e; }
+
+    .browser-address {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: #8a8a9a;
+      font-size: 10px;
+      padding: 2px 24px;
+      border-radius: 6px;
+      width: 240px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .browser-content {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: #030303;
+    }
+
+    /* Toast Notification styles */
+    .custom-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      opacity: 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .custom-toast.toast-show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .custom-toast.toast-success {
+      background-color: rgba(6, 78, 59, 0.9);
+      border-color: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+    .custom-toast.toast-error {
+      background-color: rgba(136, 19, 55, 0.9);
+      border-color: rgba(244, 63, 94, 0.2);
+      color: #fb7185;
+    }
+  </style>
+</head>
+
+<body class="bg-bg text-[#f0f0f5] font-sans antialiased overflow-x-hidden relative">
+
+  <!-- Custom Cursor Elements (Hidden on mobile) -->
+  <div class="custom-cursor hidden md:block" id="customCursor"></div>
+  <div class="custom-cursor-dot hidden md:block" id="customCursorDot"></div>
+
+  <!-- Background Decorative Glowing Lights -->
+  <div class="glow-top-right"></div>
+  <div class="glow-mid-left"></div>
+  <div class="glow-bottom-right"></div>
+
+  <!-- ═══════════════════ NAVIGATION ═══════════════════ -->
+  <nav class="sticky top-0 z-50 h-16 flex items-center backdrop-blur-md bg-bg/80 border-b border-white/5" role="navigation" aria-label="Main navigation">
+    <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8 flex justify-between items-center">
+      <a class="font-heading text-lg font-extrabold tracking-tight hover:text-accent transition-colors" href="#home">
+        Aniket Kumawat
+      </a>
+      
+      <ul class="hidden md:flex items-center gap-7 text-sm font-semibold text-[#8a8a9a]" id="navLinks" role="menubar">
+        <li><a href="#about" class="relative py-1 hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[2px] after:bg-accent after:rounded-full after:transition-all after:duration-300 after:opacity-0 hover:after:w-full hover:after:opacity-100" role="menuitem">About</a></li>
+        <li><a href="#preview" class="relative py-1 hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[2px] after:bg-accent after:rounded-full after:transition-all after:duration-300 after:opacity-0 hover:after:w-full hover:after:opacity-100" role="menuitem">Showcase</a></li>
+        <li><a href="#projects" class="relative py-1 hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[2px] after:bg-accent after:rounded-full after:transition-all after:duration-300 after:opacity-0 hover:after:w-full hover:after:opacity-100" role="menuitem">Projects</a></li>
+        <li><a href="#experience" class="relative py-1 hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[2px] after:bg-accent after:rounded-full after:transition-all after:duration-300 after:opacity-0 hover:after:w-full hover:after:opacity-100" role="menuitem">Experience</a></li>
+        <li><a href="#skills" class="relative py-1 hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[2px] after:bg-accent after:rounded-full after:transition-all after:duration-300 after:opacity-0 hover:after:w-full hover:after:opacity-100" role="menuitem">Skills</a></li>
+        <li><a href="#contact" class="px-4 py-2 bg-zinc-900 border border-white/10 hover:border-accent hover:text-white text-[#f0f0f5] rounded-full transition-all text-xs font-semibold font-heading" role="menuitem">Contact</a></li>
+      </ul>
+
+      <!-- Hamburger (Mobile) -->
+      <button class="md:hidden flex flex-col gap-1.5 p-2 z-50 focus:outline-none" id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="w-5 h-0.5 bg-[#f0f0f5] rounded-full transition-transform duration-300" id="hamburgerBar1"></span>
+        <span class="w-5 h-0.5 bg-[#f0f0f5] rounded-full transition-opacity duration-300" id="hamburgerBar2"></span>
+        <span class="w-5 h-0.5 bg-[#f0f0f5] rounded-full transition-transform duration-300" id="hamburgerBar3"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Overlay & Menu -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-opacity duration-300" id="navOverlay"></div>
+  <ul class="fixed top-0 right-0 bottom-0 w-[280px] max-w-[80%] bg-zinc-950/95 border-l border-white/5 backdrop-blur-md p-20 flex flex-col gap-6 text-base font-semibold text-[#8a8a9a] z-40 transform translate-x-full transition-transform duration-300 ease-out md:hidden" id="mobileNavMenu">
+    <li><a href="#about" class="block py-2 hover:text-white transition-colors" role="menuitem">About</a></li>
+    <li><a href="#preview" class="block py-2 hover:text-white transition-colors" role="menuitem">Showcase</a></li>
+    <li><a href="#projects" class="block py-2 hover:text-white transition-colors" role="menuitem">Projects</a></li>
+    <li><a href="#experience" class="block py-2 hover:text-white transition-colors" role="menuitem">Experience</a></li>
+    <li><a href="#skills" class="block py-2 hover:text-white transition-colors" role="menuitem">Skills</a></li>
+    <li><a href="#contact" class="block py-3 mt-4 text-center bg-zinc-900 border border-white/10 hover:border-accent text-white rounded-lg transition-all text-sm" role="menuitem">Contact Me</a></li>
+  </ul>
+
+  <!-- ═══════════════════ HERO SECTION ═══════════════════ -->
+  <header class="min-h-[calc(100vh-64px)] flex items-center py-16 relative overflow-hidden" id="home">
+    <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8 relative z-10 flex flex-col items-center text-center gap-0">
+      
+      <!-- Pill Badge -->
+      <div class="pulse-badge inline-flex items-center gap-2 bg-[#3b82f6]/10 border border-[#3b82f6]/20 text-[#a8c4ff] rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider uppercase mb-6">
+        Available for New Opportunities
+      </div>
+      
+      <!-- Heading -->
+      <h1 class="font-heading text-[2.8rem] sm:text-5xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter mb-4 text-gradient">
+        Aniket Kumawat
+      </h1>
+      
+      <!-- Subheading / Role -->
+      <p class="text-[#b0b8d0] font-heading font-semibold text-lg sm:text-xl md:text-2xl mb-4 tracking-tight">
+        Full Stack Developer &nbsp;·&nbsp; AI Enthusiast
+      </p>
+      
+      <!-- Tagline -->
+      <p class="max-w-[640px] text-[#8a8a9a] text-sm sm:text-base md:text-lg leading-relaxed mb-8">
+        I build responsive, high-performance web applications and automated pipelines that drive efficiency and deliver real-world business outcomes.
+      </p>
+      
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+        <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-accent to-[#38b2ff] hover:opacity-90 text-white rounded-full font-semibold text-sm transition-transform hover:-translate-y-[1px] shadow-lg shadow-accent/20">
+          View Projects
+        </a>
+        <a href="Aniket_Kumawat_Resume.pdf" download="Aniket_Kumawat_Resume.pdf" class="px-8 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-full font-semibold text-sm transition-transform hover:-translate-y-[1px] flex items-center justify-center gap-2">
+          <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+
+    <!-- ═══════════════════ ABOUT & IMPACT ═══════════════════ -->
+    <section class="py-24 border-t border-white/5" id="about">
+      <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-accent mb-3">About &amp; Impact</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2">What I Build</h2>
+        <p class="text-[#8a8a9a] text-sm sm:text-base max-w-[600px] mb-12">
+          Engineering solutions that focus on performance, efficiency gains, and stable full-stack data flows.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Product Focus (Left) -->
+          <article class="lg:col-span-7 glass-card p-6 md:p-8 rounded-xl-custom flex flex-col justify-between h-full">
+            <div>
+              <h3 class="font-heading text-lg font-bold mb-5 tracking-tight flex items-center gap-2">
+                <i data-lucide="compass" class="w-5 h-5 text-accent"></i> Core Engineering Focus
+              </h3>
+              <ul class="grid gap-4 mb-6">
+                <li class="flex gap-3 text-sm text-[#ccd2e2] leading-relaxed">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+                  <span><strong>Full-Stack Platforms:</strong> Designing stable schemas and endpoints using Next.js, React, Node.js, Express, and MongoDB.</span>
+                </li>
+                <li class="flex gap-3 text-sm text-[#ccd2e2] leading-relaxed">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+                  <span><strong>Computer Vision Pipelines:</strong> Automating complex image processing steps using OpenCV, GrabCut, and homography mappings.</span>
+                </li>
+                <li class="flex gap-3 text-sm text-[#ccd2e2] leading-relaxed">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+                  <span><strong>Data Science &amp; ML:</strong> Implementing data pipelines and training convolutional neural networks (CNNs) in PyTorch.</span>
+                </li>
+                <li class="flex gap-3 text-sm text-[#ccd2e2] leading-relaxed">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+                  <span><strong>UX Optimization:</strong> Guaranteeing fast responses and robust mobile responsiveness across diverse client test environments.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-6 border-t border-white/5 text-xs text-[#8a8a9a] leading-relaxed flex items-center gap-2">
+              <i data-lucide="clock" class="w-4 h-4 text-accent"></i>
+              Hands-on internship experience shipping code in dynamic industry environments.
+            </div>
+          </article>
+
+          <!-- Metric Cards (Right) -->
+          <aside class="lg:col-span-5 grid grid-cols-2 gap-4">
+            
+            <!-- Metric 1 -->
+            <!-- <div class="bg-zinc-900/50 border border-white/5 p-5 rounded-lg-custom">
+              <div class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-1 text-accent font-heading">~90%</div>
+              <div class="text-xs text-[#8a8a9a] leading-snug">Time efficiency gain in automated carpet perspective correction</div>
+            </div> -->
+
+            <!-- Metric 2 -->
+            <div class="bg-zinc-900/50 border border-white/5 p-5 rounded-lg-custom">
+              <div class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-1 text-emerald-400 font-heading">10-15s</div>
+              <div class="text-xs text-[#8a8a9a] leading-snug">Processing time per image, down from 180s manual editing</div>
+            </div>
+
+            <!-- Metric 3 -->
+            <div class="bg-zinc-900/50 border border-white/5 p-5 rounded-lg-custom">
+              <div class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-1 text-violet-400 font-heading">4+</div>
+              <div class="text-xs text-[#8a8a9a] leading-snug">Robust projects built end-to-end across React, OpenCV, &amp; PyTorch</div>
+            </div>
+
+            <!-- Metric 4 -->
+            <div class="bg-zinc-900/50 border border-white/5 p-5 rounded-lg-custom">
+              <div class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-1 text-white font-heading">1</div>
+              <div class="text-xs text-[#8a8a9a] leading-snug">Delivered a production-ready application that is currently live and used by real users.</div>
+            </div>
+            
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ APP PREVIEW (INTERACTIVE MOCKUP) ═══════════════════ -->
+    <section class="py-24 border-t border-white/5" id="preview">
+      <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-accent mb-3">Interactive Showcase</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2">EcoTrace Dashboard</h2>
+        <p class="text-[#8a8a9a] text-sm sm:text-base max-w-[600px] mb-12">
+          An interactive walkthrough showing the UI and frontend workflow of EcoTrace, my carbon footprint calculator.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Mockup Info (Left) -->
+          <article class="lg:col-span-5 flex flex-col justify-center">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-accent/10 border border-accent/20 text-[#a8c4ff] rounded-full text-xs font-bold font-heading">Next.js</span>
+              <span class="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full text-xs font-bold font-heading">MongoDB</span>
+              <span class="px-3 py-1 bg-violet-500/10 border border-violet-500/20 text-violet-400 rounded-full text-xs font-bold font-heading">TypeScript</span>
+              <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-full text-xs font-bold font-heading">LLM API</span>
+            </div>
+            
+            <h3 class="font-heading text-xl sm:text-2xl font-extrabold mb-5 tracking-tight">EcoTrace - AI Carbon Auditor</h3>
+            
+            <!-- Description Slides matching the iPhone mockup screen -->
+            <div id="mockupDescriptions" class="min-h-[220px]">
+              
+              <!-- Slide 1 Desc -->
+              <div class="mockup-desc-slide active space-y-4">
+                <div class="space-y-1">
+                  <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Screen 1 of 5: Dashboard Overview</span>
+                  <h4 class="text-base font-bold text-[#f0f0f5]">Interactive Sustainability Meter</h4>
+                </div>
+                <p class="text-sm text-[#ccd2e2] leading-relaxed">
+                  Users receive an instantly compiled carbon audit display. The circular dashboard shows current carbon emission status rated relative to target baselines across energy usage, transit habits, waste profiles, and food intake.
+                </p>
+                <div class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-4 h-4"></i> Live dynamic metric scoring
+                </div>
+              </div>
+
+              <!-- Slide 2 Desc -->
+              <div class="mockup-desc-slide hidden space-y-4">
+                <div class="space-y-1">
+                  <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Screen 2 of 5: Live Activity Logger</span>
+                  <h4 class="text-base font-bold text-[#f0f0f5]">Real-time Carbon Impact Calculator</h4>
+                </div>
+                <p class="text-sm text-[#ccd2e2] leading-relaxed">
+                  An interactive dashboard interface allowing users to select their transportation category and distance to immediately calculate and log carbon emissions.
+                </p>
+                <div class="text-xs text-accent font-semibold flex items-center gap-1.5">
+                  <i data-lucide="sparkles" class="w-4 h-4"></i> Interactive calculations rendered immediately
+                </div>
+              </div>
+
+              <!-- Slide 3 Desc -->
+              <div class="mockup-desc-slide hidden space-y-4">
+                <div class="space-y-1">
+                  <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Screen 3 of 5: AI Recommendations</span>
+                  <h4 class="text-base font-bold text-[#f0f0f5]">AI-Generated Sustainability Insights</h4>
+                </div>
+                <p class="text-sm text-[#ccd2e2] leading-relaxed">
+                  Integrating LLM APIs to provide contextualized feedback based on user logs. The chatbot replies with personalized action plans, pointing out carbon-offset steps and waste-reduction tasks.
+                </p>
+                <div class="text-xs text-violet-400 font-semibold flex items-center gap-1.5">
+                  <i data-lucide="cpu" class="w-4 h-4"></i> LLM advice tailored to individual metrics
+                </div>
+              </div>
+
+              <!-- Slide 4 Desc -->
+              <div class="mockup-desc-slide hidden space-y-4">
+                <div class="space-y-1">
+                  <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Screen 4 of 5: Export Audits</span>
+                  <h4 class="text-base font-bold text-[#f0f0f5]">PDF Carbon Audit Report Generation</h4>
+                </div>
+                <p class="text-sm text-[#ccd2e2] leading-relaxed">
+                  Supports automated PDF compilation of carbon assessments, including customized carbon reduction targets, user trends, and printable summaries suitable for corporate transparency audits.
+                </p>
+                <div class="text-xs text-[#a8c4ff] font-semibold flex items-center gap-1.5">
+                  <i data-lucide="file-text" class="w-4 h-4"></i> Fully stylized PDF reports ready for download
+                </div>
+              </div>
+
+              <!-- Slide 5 Desc -->
+              <div class="mockup-desc-slide hidden space-y-4">
+                <div class="space-y-1">
+                  <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Screen 5 of 5: Carbon Offsets</span>
+                  <h4 class="text-base font-bold text-[#f0f0f5]">Carbon Offset Marketplace</h4>
+                </div>
+                <p class="text-sm text-[#ccd2e2] leading-relaxed">
+                  Matches user footprints against active regional carbon reduction initiatives, enabling direct support for green solar farms, reforestation schemes, and agricultural environmental projects.
+                </p>
+                <div class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <i data-lucide="heart" class="w-4 h-4"></i> Certified environmental projects listing
+                </div>
+              </div>
+
+            </div>
+          </article>
+          
+          <!-- Desktop Mockup (Right) -->
+          <div class="lg:col-span-7 flex flex-col items-center w-full">
+            
+            <div class="browser-mockup w-full" aria-label="EcoTrace Desktop App Showcase">
+              <!-- Browser Topbar -->
+              <div class="browser-topbar select-none">
+                <div class="browser-dots">
+                  <div class="browser-dot red"></div>
+                  <div class="browser-dot yellow"></div>
+                  <div class="browser-dot green"></div>
+                </div>
+                <div class="browser-address">https://ecotrace.aniket.dev/dashboard</div>
+              </div>
+
+              <!-- Browser Content / Slides -->
+              <div class="browser-content">
+                <!-- Slide 1: Welcome/Dashboard -->
+                <img src="screen1.png" alt="EcoTrace Dashboard Overview" class="screen-slide active absolute inset-0 w-full h-full object-contain opacity-100 transition-opacity duration-300 pointer-events-none select-none">
+                
+                <!-- Slide 2: Activity Logger -->
+                <img src="screen2.png" alt="EcoTrace Carbon Calculator" class="screen-slide absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 pointer-events-none select-none">
+                
+                <!-- Slide 3: AI Recommendations -->
+                <img src="screen3.png" alt="EcoTrace AI Advisor" class="screen-slide absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 pointer-events-none select-none">
+                
+                <!-- Slide 4: PDF Reports -->
+                <img src="screen4.png" alt="EcoTrace PDF Audit Export" class="screen-slide absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 pointer-events-none select-none">
+                
+                <!-- Slide 5: Marketplace -->
+                <img src="screen5.png" alt="EcoTrace Offset Marketplace" class="screen-slide absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 pointer-events-none select-none">
+              </div>
+            </div>
+
+            <!-- Slideshow controls -->
+            <div class="flex items-center justify-center gap-4 mt-6 select-none" aria-label="Mockup slide controls">
+              <button class="w-9 h-9 rounded-full border border-white/10 hover:border-accent/40 bg-white/5 hover:bg-accent/10 text-[#8a8a9a] hover:text-accent flex items-center justify-center text-xs transition-colors shrink-0" id="slidePrev" aria-label="Previous screen">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              </button>
+              <div class="flex items-center gap-2" id="slideDots">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent transition-all duration-300 w-4"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-zinc-800 transition-all duration-300"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-zinc-800 transition-all duration-300"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-zinc-800 transition-all duration-300"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-zinc-800 transition-all duration-300"></span>
+              </div>
+              <button class="w-9 h-9 rounded-full border border-white/10 hover:border-accent/40 bg-white/5 hover:bg-accent/10 text-[#8a8a9a] hover:text-accent flex items-center justify-center text-xs transition-colors shrink-0" id="slideNext" aria-label="Next screen">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SELECTED PROJECTS ═══════════════════ -->
+    <section class="py-24 border-t border-white/5" id="projects">
+      <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-accent mb-3">Selected Projects</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2">What I've Shipped</h2>
+        <p class="text-[#8a8a9a] text-sm sm:text-base max-w-[600px] mb-12">
+          Each project is structured around specific challenges, execution paths, and measurable user or performance improvements.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Project 1: EcoTrace -->
+          <article class="bg-zinc-900/40 hover:bg-zinc-900/60 border border-white/5 hover:border-accent/30 p-6 rounded-lg-custom flex flex-col justify-between gap-6 transition-all duration-300 group hover:-translate-y-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-heading text-lg font-bold text-white tracking-tight">EcoTrace Carbon Platform</h3>
+                <a href="https://ecotrace-app.vercel.app/" target="_blank"><i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i></a>
+              </div>
+              
+              <div class="space-y-3 mb-4">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Problem</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Users lack an easy, verified mechanism to calculate, track, and offset carbon metrics with contextual, data-backed guidance.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Solution</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Developed a full-stack dashboard featuring custom calculators across 4 sectors, JWT role auth, LLM advisory insights, and PDF exports.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Impact</span>
+                  <p class="text-xs text-emerald-400 font-semibold">Fully functioning carbon accounting dashboard deployed to Vercel.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">Next.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">TypeScript</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">MongoDB</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">LLM API</span>
+            </div>
+          </article>
+
+          <!-- Project 2: Carpet Automation Tool -->
+          <article class="bg-zinc-900/40 hover:bg-zinc-900/60 border border-white/5 hover:border-accent/30 p-6 rounded-lg-custom flex flex-col justify-between gap-6 transition-all duration-300 group hover:-translate-y-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-heading text-lg font-bold text-white tracking-tight">Carpet Perspective Correction Tool</h3>
+                <!-- <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i> -->
+              </div>
+              
+              <div class="space-y-3 mb-4">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Problem</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Photoshop correction of skewed carpet images required manual labor taking up to 3 minutes (180s) per product layout.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Solution</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Engineered a computer vision pipeline with OpenCV to segment boundaries, isolate objects, and run homography perspective transformation.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Impact</span>
+                  <p class="text-xs text-emerald-400 font-semibold">Reduced run time by ~90% (now takes just 10-15s per image).</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">Python</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">OpenCV</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">NumPy</span>
+            </div>
+          </article>
+
+          <!-- Project 3: Plant Disease Prediction -->
+          <article class="bg-zinc-900/40 hover:bg-zinc-900/60 border border-white/5 hover:border-accent/30 p-6 rounded-lg-custom flex flex-col justify-between gap-6 transition-all duration-300 group hover:-translate-y-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-heading text-lg font-bold text-white tracking-tight">Plant Leaf Disease Predictor</h3>
+                <!-- <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i> -->
+              </div>
+              
+              <div class="space-y-3 mb-4">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Problem</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Early detection of agricultural diseases is crucial to avoid severe crop loss, but manual examination requires rare expertise.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Solution</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Built a deep learning CNN model using PyTorch, implementing a full data pipeline containing tensor scaling, splitting, and validation checks.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Impact</span>
+                  <p class="text-xs text-emerald-400 font-semibold">Trained neural network models achieving high classification accuracy scores.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">PyTorch</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">Pandas</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">NumPy</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">CNN</span>
+            </div>
+          </article>
+
+          <!-- Project 4: SkillFlix -->
+          <article class="bg-zinc-900/40 hover:bg-zinc-900/60 border border-white/5 hover:border-accent/30 p-6 rounded-lg-custom flex flex-col justify-between gap-6 transition-all duration-300 group hover:-translate-y-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-heading text-lg font-bold text-white tracking-tight">SkillFlix E-Learning Platform</h3>
+                <!-- <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i> -->
+              </div>
+              
+              <div class="space-y-3 mb-4">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Problem</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Online schools require stable gates to control content delivery streams, distinguishing premium subscribers from general guests.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Solution</span>
+                  <p class="text-xs text-[#ccd2e2] leading-relaxed">Created a React storefront backed by Node/Express, embedding secure JWT authorization hooks directing video play features.</p>
+                </div>
+                
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Impact</span>
+                  <p class="text-xs text-emerald-400 font-semibold">Fully responsive course preview interfaces integrated with local backend.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">React.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">Express.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">Tailwind CSS</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#b0bcd4] hover:text-[#c8d8ff] rounded px-2.5 py-1 text-[10px] font-medium transition-colors">Node.js</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ EXPERIENCE TIMELINE ═══════════════════ -->
+    <section class="py-24 border-t border-white/5" id="experience">
+      <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-accent mb-3">Work History</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2">Career Timeline</h2>
+        <p class="text-[#8a8a9a] text-sm sm:text-base max-w-[600px] mb-12">
+          Engineering solutions in software delivery, data computation pipelines, and automated computer vision workflows.
+        </p>
+
+        <!-- Vertical Timeline -->
+        <div class="relative pl-6 flex flex-col gap-0">
+          
+          <!-- Vertical Line -->
+          <div class="absolute left-0 top-2 bottom-2 w-[1.5px] timeline-track"></div>
+
+          <!-- Timeline Item 1 -->
+          <article class="relative pl-6 pb-12">
+            <div class="absolute -left-[30px] top-1.5 w-3 h-3 rounded-full bg-accent border-2 border-bg ring-4 ring-accent/20"></div>
+            <div class="flex items-center gap-3 mb-2 flex-wrap text-[10px]">
+              <span class="font-semibold uppercase tracking-wider text-zinc-400">Feb 2026 — May 2026</span>
+              <span class="font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">Completed</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-white tracking-tight">Full Stack &amp; Automation Intern</h3>
+            <p class="text-xs font-semibold text-accent mb-3">Jaipur Rugs</p>
+            <ul class="text-sm text-[#8a8a9a] leading-relaxed max-w-[680px] space-y-2 list-disc list-inside">
+              <li>Deployed <strong class="text-white font-medium">EcoTrace</strong>: Full-stack carbon footprint platform (Next.js, MongoDB, TypeScript) serving real users with AI-powered sustainability insights.</li>
+              <li>Built <strong class="text-white font-medium">OpenCV</strong> image processing pipeline for automated carpet perspective correction: <strong class="text-white font-medium">~90% efficiency gain</strong> (reduced from 180s to 10-15s per image) using GrabCut segmentation and homography transformation.</li>
+              <li>Optimized backend workflows using <strong class="text-white font-medium">Pandas</strong> and <strong class="text-white font-medium">NumPy</strong> for efficient data computation and MongoDB schema design.</li>
+            </ul>
+          </article>
+
+          <!-- Timeline Item 2 -->
+          <article class="relative pl-6">
+            <div class="absolute -left-[30px] top-1.5 w-3 h-3 rounded-full bg-zinc-800 border-2 border-bg"></div>
+            <div class="flex items-center gap-3 mb-2 flex-wrap text-[10px]">
+              <span class="font-semibold uppercase tracking-wider text-zinc-500">Dec 2022 — Feb 2023</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-white tracking-tight">Frontend Web Development Intern</h3>
+            <p class="text-xs font-semibold text-accent mb-3">UBGOT Software Pvt. Ltd.</p>
+            <ul class="text-sm text-[#8a8a9a] leading-relaxed max-w-[680px] space-y-2 list-disc list-inside">
+              <li>Optimized website responsiveness for client test pages to ensure consistent user experience across multiple devices and screen sizes.</li>
+              <li>Studied backend programming patterns and supported implementation of REST APIs, connecting database structures to user layouts.</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ TECHNICAL SKILLS ═══════════════════ -->
+    <section class="py-24 border-t border-white/5" id="skills">
+      <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-accent mb-3">Capabilities</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2">Technical Skillset</h2>
+        <p class="text-[#8a8a9a] text-sm sm:text-base max-w-[600px] mb-12">
+          Structured capabilities across language models, frameworks, database designs, and vision algorithms.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <!-- Category 1 -->
+          <article class="bg-zinc-900/40 border border-white/5 p-6 rounded-lg-custom">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-1.5">
+              <i data-lucide="code-2" class="w-4 h-4 text-accent"></i> Programming &amp; Scripting
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Python</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">C++</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">TypeScript</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">JavaScript</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">HTML5 &amp; CSS3</span>
+            </div>
+          </article>
+
+          <!-- Category 2 -->
+          <article class="bg-zinc-900/40 border border-white/5 p-6 rounded-lg-custom">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-1.5">
+              <i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i> Frameworks &amp; Libraries
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Next.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">React.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Node.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Express.js</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Tailwind CSS</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">OpenCV</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">TensorFlow</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">PyTorch</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Pandas &amp; NumPy</span>
+            </div>
+          </article>
+
+          <!-- Category 3 -->
+          <article class="bg-zinc-900/40 border border-white/5 p-6 rounded-lg-custom">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-1.5">
+              <i data-lucide="database" class="w-4 h-4 text-violet-400"></i> Databases &amp; Services
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">MongoDB</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">MySQL</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Mongoose ODM</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">JWT Auth</span>
+            </div>
+          </article>
+
+          <!-- Category 4 -->
+          <article class="bg-zinc-900/40 border border-white/5 p-6 rounded-lg-custom">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-1.5">
+              <i data-lucide="wrench" class="w-4 h-4 text-white"></i> Tools &amp; Workflows
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Git &amp; GitHub</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">VS Code</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Vercel</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">REST APIs</span>
+              <span class="bg-white/5 border border-white/5 hover:bg-accent/10 hover:border-accent/25 text-[#ccd2e2] rounded px-3 py-1.5 text-xs font-semibold tracking-wide transition-all">Agile / Scrum</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CONTACT ═══════════════════ -->
+    <section class="py-24 border-t border-white/5" id="contact">
+      <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-accent mb-3">Get in Touch</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2">Let's Work Together</h2>
+        <p class="text-[#8a8a9a] text-sm sm:text-base max-w-[600px] mb-12">
+          Feel free to reach out to discuss job opportunities, software challenges, or potential collaborations.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Contact Info (Left) -->
+          <aside class="lg:col-span-5 space-y-6">
+            <h3 class="font-heading text-xl font-bold tracking-tight">Open to Opportunities</h3>
+            <p class="text-[#8a8a9a] text-sm leading-relaxed">
+              I am currently seeking full-time roles, internships, or project collaborations in Full Stack Development, Automation engineering, and AI application design.
+            </p>
+            <div class="flex flex-col gap-4 text-sm text-[#8a8a9a]">
+              <a href="mailto:aniketkmt02@gmail.com" class="flex items-center gap-3 hover:text-white transition-colors group">
+                <span class="w-9 h-9 rounded bg-zinc-900 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-accent group-hover:border-accent/20 transition-all shrink-0">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </span>
+                aniketkmt02@gmail.com
+              </a>
+              <a href="tel:8005922536" class="flex items-center gap-3 hover:text-white transition-colors group">
+                <span class="w-9 h-9 rounded bg-zinc-900 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-accent group-hover:border-accent/20 transition-all shrink-0">
+                  <i data-lucide="phone" class="w-4 h-4"></i>
+                </span>
+                +91 8005922536
+              </a>
+              <span class="flex items-center gap-3 text-[#8a8a9a]">
+                <span class="w-9 h-9 rounded bg-zinc-900 border border-white/5 flex items-center justify-center text-zinc-400 shrink-0">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </span>
+                Jaipur, Rajasthan, India
+              </span>
+              <a href="https://github.com/aniketk18" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-white transition-colors group">
+                <span class="w-9 h-9 rounded bg-zinc-900 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-accent group-hover:border-accent/20 transition-all shrink-0">
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                </span>
+                github.com/aniketk18
+              </a>
+            </div>
+          </aside>
+
+          <!-- Contact Form (Right) -->
+          <div class="lg:col-span-7 bg-zinc-900/40 border border-white/5 p-6 md:p-8 rounded-xl-custom">
+            <!-- FormSubmit.co free AJAX integration — emails go directly to aniketkmt02@gmail.com -->
+            <form class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="contactForm" novalidate>
+              <!-- FormSubmit hidden config fields -->
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_subject" value="New Portfolio Contact: ">
+
+              <div class="flex flex-col gap-1.5">
+                <label for="name" class="text-xs font-semibold text-zinc-400 tracking-wide">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required 
+                  class="bg-zinc-950/80 border border-white/5 focus:border-accent rounded-md-custom px-4 py-2.5 text-sm text-[#f0f0f5] outline-none transition-colors" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="email" class="text-xs font-semibold text-zinc-400 tracking-wide">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required 
+                  class="bg-zinc-950/80 border border-white/5 focus:border-accent rounded-md-custom px-4 py-2.5 text-sm text-[#f0f0f5] outline-none transition-colors" />
+              </div>
+              <div class="flex flex-col gap-1.5 sm:col-span-2">
+                <label for="subject" class="text-xs font-semibold text-zinc-400 tracking-wide">Subject</label>
+                <input id="subject" name="subject" type="text" placeholder="What opportunity is it?" required 
+                  class="bg-zinc-950/80 border border-white/5 focus:border-accent rounded-md-custom px-4 py-2.5 text-sm text-[#f0f0f5] outline-none transition-colors" />
+              </div>
+              <div class="flex flex-col gap-1.5 sm:col-span-2">
+                <label for="message" class="text-xs font-semibold text-zinc-400 tracking-wide">Message</label>
+                <textarea id="message" name="message" placeholder="Tell me about the project or job role..." required 
+                  class="bg-zinc-950/80 border border-white/5 focus:border-accent rounded-md-custom px-4 py-2.5 text-sm text-[#f0f0f5] outline-none transition-colors min-h-[120px] resize-y"></textarea>
+              </div>
+              <div class="sm:col-span-2 pt-2">
+                <button class="w-full bg-gradient-to-r from-accent to-[#38b2ff] hover:opacity-90 text-white py-3 rounded-md-custom font-semibold text-sm transition-transform hover:-translate-y-[1px] shadow-lg shadow-accent/15 flex items-center justify-center gap-2" type="submit" id="sendBtn">
+                  <i data-lucide="send" class="w-4 h-4"></i> Send Message
+                </button>
+                <p class="text-xs mt-3 min-h-[1.2rem]" id="formStatus" aria-live="polite"></p>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="border-t border-white/5 py-8 text-zinc-500 text-xs">
+    <div class="w-full max-w-[1160px] mx-auto px-5 md:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+      <p>© 2026 Aniket Kumawat — Full Stack &amp; AI Developer</p>
+      <nav class="flex gap-6 text-zinc-500" aria-label="Footer Navigation">
+        <a href="#home" class="hover:text-zinc-300 transition-colors">Top</a>
+        <a href="#projects" class="hover:text-zinc-300 transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-zinc-300 transition-colors">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ JAVASCRIPT LOGIC ═══════════════════ -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    /* ─── Scroll Spy active state ─── */
+    (function () {
+      const sections = document.querySelectorAll('header[id], section[id]');
+      const navLinks = document.querySelectorAll('#navLinks a[href^="#"]');
+
+      function setActive(id) {
+        navLinks.forEach(a => {
+          const matches = a.getAttribute('href') === '#' + id;
+          a.classList.toggle('nav-active', matches);
+        });
+      }
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+
+      sections.forEach(s => observer.observe(s));
+    })();
+
+    /* ─── Custom Cursor Script ─── */
+    (function () {
+      const cursor = document.getElementById('customCursor');
+      const cursorDot = document.getElementById('customCursorDot');
+
+      if (cursor && cursorDot) {
+        document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+          
+          cursorDot.style.left = e.clientX + 'px';
+          cursorDot.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, input, textarea, select').forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            cursor.classList.add('scale-150', 'bg-accent/10', 'border-accent');
+            cursorDot.classList.add('scale-0');
+          });
+          el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('scale-150', 'bg-accent/10', 'border-accent');
+            cursorDot.classList.remove('scale-0');
+          });
+        });
+      }
+    })();
+
+    /* ─── Mobile Navbar Menu ─── */
+    (function () {
+      const btn = document.getElementById('menuBtn');
+      const overlay = document.getElementById('navOverlay');
+      const menu = document.getElementById('mobileNavMenu');
+      const bar1 = document.getElementById('hamburgerBar1');
+      const bar2 = document.getElementById('hamburgerBar2');
+      const bar3 = document.getElementById('hamburgerBar3');
+
+      function toggleMenu(force) {
+        const isOpen = menu.classList.contains('translate-x-0');
+        const nextState = typeof force === 'boolean' ? force : !isOpen;
+
+        if (nextState) {
+          menu.classList.remove('translate-x-full');
+          menu.classList.add('translate-x-0');
+          overlay.classList.remove('hidden');
+          setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+          btn.setAttribute('aria-expanded', 'true');
+          
+          // Animate hamburger to X
+          bar1.classList.add('translate-y-2', 'rotate-45');
+          bar2.classList.add('opacity-0');
+          bar3.classList.add('-translate-y-2', '-rotate-45');
+          
+          document.body.style.overflow = 'hidden';
+        } else {
+          menu.classList.add('translate-x-full');
+          menu.classList.remove('translate-x-0');
+          overlay.classList.add('opacity-0');
+          setTimeout(() => overlay.classList.add('hidden'), 300);
+          btn.setAttribute('aria-expanded', 'false');
+
+          // Animate X back to hamburger
+          bar1.classList.remove('translate-y-2', 'rotate-45');
+          bar2.classList.remove('opacity-0');
+          bar3.classList.remove('-translate-y-2', '-rotate-45');
+
+          document.body.style.overflow = '';
+        }
+      }
+
+      btn.addEventListener('click', () => toggleMenu());
+      overlay.addEventListener('click', () => toggleMenu(false));
+
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => toggleMenu(false));
+      });
+    })();
+
+    /* ─── App UI Mockup Slider ─── */
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.screen-slide');
+    const descSlides = document.querySelectorAll('.mockup-desc-slide');
+    const dotsContainer = document.querySelector('#slideDots');
+    const prevBtn = document.getElementById('slidePrev');
+    const nextBtn = document.getElementById('slideNext');
+    let autoPlayTimer;
+
+    function renderDots() {
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = `w-1.5 h-1.5 rounded-full transition-all duration-300 focus:outline-none ${i === currentSlideIndex ? 'bg-accent w-4' : 'bg-zinc-800 hover:bg-zinc-700'}`;
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => {
+          switchSlide(i);
+          startAutoPlay();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function switchSlide(targetIndex) {
+      // Hide current
+      slides[currentSlideIndex].classList.remove('opacity-100');
+      slides[currentSlideIndex].classList.add('opacity-0');
+      
+      descSlides[currentSlideIndex].classList.add('hidden');
+      descSlides[currentSlideIndex].classList.remove('active');
+
+      // Set index
+      currentSlideIndex = (targetIndex + slides.length) % slides.length;
+
+      // Show target
+      slides[currentSlideIndex].classList.remove('opacity-0');
+      slides[currentSlideIndex].classList.add('opacity-100');
+      
+      descSlides[currentSlideIndex].classList.remove('hidden');
+      descSlides[currentSlideIndex].classList.add('active');
+
+      renderDots();
+    }
+
+    function startAutoPlay() {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(() => {
+        switchSlide(currentSlideIndex + 1);
+      }, 4500);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      switchSlide(currentSlideIndex - 1);
+      startAutoPlay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      switchSlide(currentSlideIndex + 1);
+      startAutoPlay();
+    });
+
+    // Start auto slider on launch
+    renderDots();
+    startAutoPlay();
+
+    /* ─── Toast Notification System ─── */
+    function showToast(message, type = 'success') {
+      const existingToast = document.getElementById('formToast');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'formToast';
+      toast.className = `custom-toast toast-${type}`;
+      
+      const icon = type === 'success' ? 'check-circle' : 'alert-circle';
+      toast.innerHTML = `
+        <i data-lucide="${icon}" class="w-5 h-5 shrink-0"></i>
+        <span class="text-sm font-semibold">${message}</span>
+      `;
+      
+      document.body.appendChild(toast);
+      lucide.createIcons();
+      
+      // Force a reflow to trigger transition animation
+      toast.offsetHeight;
+      
+      // Animate in
+      toast.classList.add('toast-show');
+      
+      // Animate out & remove
+      setTimeout(() => {
+        toast.classList.remove('toast-show');
+        setTimeout(() => {
+          toast.remove();
+        }, 500);
+      }, 3500);
+    }
+
+    /* ─── Contact Form Submission (FormSubmit.co AJAX) ─── */
+    (function () {
+      const form = document.getElementById('contactForm');
+      const btn = document.getElementById('sendBtn');
+      const status = document.getElementById('formStatus');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Show loading state
+        btn.disabled = true;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Sending...`;
+        lucide.createIcons();
+        if (status) status.textContent = '';
+
+        // Build JSON payload for FormSubmit AJAX endpoint
+        const payload = {
+          name:    document.getElementById('name').value.trim(),
+          email:   document.getElementById('email').value.trim(),
+          subject: document.getElementById('subject').value.trim(),
+          message: document.getElementById('message').value.trim(),
+          _captcha: 'false',
+          _template: 'table'
+        };
+
+        try {
+          const res = await fetch('https://formsubmit.co/ajax/aniketkmt02@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success === 'true') {
+            // ✅ Success
+            form.reset();
+            showToast('Message sent! I\'ll get back to you shortly. ✓', 'success');
+            if (status) {
+              status.textContent = '✓ Message sent successfully!';
+              status.className = 'text-xs mt-3 min-h-[1.2rem] text-emerald-400 font-semibold';
+            }
+            // Refresh page after toast is visible
+            setTimeout(() => window.location.reload(), 3000);
+          } else {
+            throw new Error(data.message || 'Submission failed.');
+          }
+        } catch (err) {
+          // ❌ Error
+          showToast('Something went wrong. Please try again or email me directly.', 'error');
+          if (status) {
+            status.textContent = 'Error: ' + (err.message || 'Could not send message.');
+            status.className = 'text-xs mt-3 min-h-[1.2rem] text-rose-400 font-semibold';
+          }
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i> Send Message`;
+          lucide.createIcons();
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
